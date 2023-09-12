@@ -66,7 +66,7 @@ function Cadastro() {
             alignItems: "center"
         }}>
             <Typography component="h1" variant='h4'>Cadastrar</Typography>
-            { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }} >Desculpe tente novamente</Alert> ) }
+            { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }} >Desculpe tente novamente</Alert> )}
             { cadastro && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }}>Obrigado por se cadastrar</Alert>)}
             <Box component="form" onSubmit={Cadastrar}>
                 <TextField 
