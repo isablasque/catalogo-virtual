@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Filme from "./components/Filme";
 import { Container } from "@mui/material";
+import "./global.css"
+import Menu from "./components/Menu";
+
 
 function App() {
 
@@ -43,6 +46,7 @@ function Excluir( evento, id ){
 
   return (
     <>
+      <Menu></Menu>
       <h1>Filmes</h1>
       <Container sx={{
         display: "flex",

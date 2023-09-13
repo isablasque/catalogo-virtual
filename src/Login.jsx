@@ -3,8 +3,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, json } from 'react-router-dom';
 
-
-
 function Login() {
 
   const [ email, setEmail ] = useState( "" );
