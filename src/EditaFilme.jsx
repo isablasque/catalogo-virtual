@@ -2,6 +2,7 @@ import { Alert, Box, Button, Container, TextField, Typography } from '@mui/mater
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Menu from './components/Menu';
 
 function EditaFilme() {
 
@@ -35,9 +36,7 @@ function EditaFilme() {
           setImagem(json.imagem);
         }else {
           setErro( "Filme não encontrado" );
-        }
-        
-          
+        }    
       } )
       .catch( (erro) => { setErro( true ) })
 
@@ -90,6 +89,8 @@ function EditaFilme() {
     }, [ cadastroFilme ] );*/
 
   return (
+    <>
+    <Menu></Menu>
     <Container component="section" maxWidth="sm">
       <Box sx={{
             mt:10,
@@ -164,6 +165,7 @@ function EditaFilme() {
           </Box>
       </Box>
     </Container>
+    </>
   )
 }
 

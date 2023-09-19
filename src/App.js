@@ -3,6 +3,7 @@ import Filme from "./components/Filme";
 import { Container } from "@mui/material";
 import "./global.css"
 import Menu from "./components/Menu";
+import Musica from "./components/Musica"
 
 
 function App() {
@@ -47,7 +48,6 @@ function Excluir( evento, id ){
   return (
     <>
       <Menu></Menu>
-      <h1>Filmes</h1>
       <Container sx={{
         display: "flex",
         flexFlow: "row",

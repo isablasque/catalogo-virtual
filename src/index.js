@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider} from "react-router-dom";
 import Login from './Login';
 import Cadastro from "./Cadastro";
 import Filmes from './Filmes';
+import Musicas from './Musicas'
 import EditaFilme from './EditaFilme';
 
 const theme = createTheme({
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: "/filmes",
     element: <Filmes />
+  },
+  {
+    path: "/musicas",
+    element: <Musicas />
   },
   {
     path: "/edicao/:id",

@@ -1,6 +1,7 @@
 import { Alert, Box, Button, Container, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useState, useEffect } from 'react';
+import Menu from './components/Menu';
 
 function Filmes() {
 const [titulo, setTitulo] = useState( "" );
@@ -57,7 +58,9 @@ const [ errof, setErroF ] = useState( false );
         }, [ filme ] );
 
   return (
-   <Container component="section" maxWidth="sm">
+    <>
+    <Menu></Menu>
+    <Container component="section" maxWidth="sm">
     <Box sx={{
                 mt:5,
                 background: "#dce0e6",
@@ -69,7 +72,7 @@ const [ errof, setErroF ] = useState( false );
             }}>
                 <Typography component="h1" variant='h4'>Filmes</Typography>
                 { errof && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }}>Desculpe tente novamente</Alert>)}
-            {filme && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }}>Obrigado por cadastrar</Alert>)}
+                {filme && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }}>Obrigado por cadastrar</Alert>)}
             <Box component="form" onSubmit={CadastrarFilme}>
                 <TextField
                 type="text" 
@@ -130,6 +133,7 @@ const [ errof, setErroF ] = useState( false );
 
             </Box>
     </Container>
+    </>
   )
 }
 

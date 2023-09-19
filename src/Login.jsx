@@ -2,6 +2,8 @@ import { Alert, Box, Button, Checkbox, Container, FormControlLabel, Grid, TextFi
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, json } from 'react-router-dom';
+import Menu from './components/Menu';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Login() {
 
@@ -12,8 +14,6 @@ function Login() {
   const [ erro, setErro ] = useState( false );
   const navigate = useNavigate();
 
-
-    /*  */
   useEffect( () => {
 
     if( login ) {
@@ -30,79 +30,96 @@ function Login() {
     evento.preventDefault();
     fetch( process.env.REACT_APP_BACKEND + "login", {
         method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify
+        (
             {
                 email: email,
                 senha: senha
             }
         )
-    } )
+    })
     .then( (resposta) => resposta.json() )
-    .then( ( json ) => {
-
-        if( json.user ) {
+    .then( ( json ) =>
+    {
+        if( json.user ) 
+        {
             setLogin( true );
-        } else {
+        } 
+        else 
+        {
             setErro( true );
         }
     } )
     .catch( ( erro ) => {  setErro( true ) } )
-    
   }
 
   return (
+    <>
+    <Menu></Menu>
     <Container component="section" maxWidth="xs" >
         <Box 
-        sx={{ 
-            mt: 10,
-            backgroundColor: "#EDEDED",
+        sx={{
+            mt:5,
+            background: "#dce0e6",
             padding: "30px",
-            borderRadius: "10px",
+            borderRadius: "28px",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
-        }}
-        >
-            <Typography component="h1" variant='h4'>Entrar</Typography>
-            { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }}>Revise seus dados e tente novamente</Alert> ) }
+            alignItems: "center",
+        }}>
+            <Typography variant="overline" display="block" gutterBottom>
+                Entrar
+            </Typography>
             <Box component="form" onSubmit={Autenticar}>
-                <TextField 
-                  type="email"
-                  label="Email" 
-                  variant="filled" 
-                  margin="normal"
-                  value={email}
-                  onChange={ (e) => setEmail( e.target.value ) }
-                  fullWidth
+                <TextField
+                    type="text"
+                    label="Email" 
+                    variant="standard"
+                    margin="normal"
+                    value={email}
+                    onChange={ (e) => setEmail( e.target.value )}
+                    fullWidth
                 />
-                <TextField 
-                  type="password" 
-                  label="Senha" 
-                  variant="filled" 
-                  margin="normal" 
-                  fullWidth
-                  value={senha}
-                  onChange={ (e) => setSenha( e.target.value ) }
+                <TextField
+                    type="text"
+                    label="Senha" 
+                    variant="standard"
+                    margin="normal"
+                    value={senha}
+                    onChange={ (e) => setSenha( e.target.value )}
+                    fullWidth
                 />
                 <FormControlLabel
                     control={ <Checkbox value={lembrar} name="lembrar" onChange={(e) => setLembrar( !lembrar ) } />}
                     label="Lembrar-me"
                 />
-                <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 }} size="large">Login</Button>
+                <Button 
+                variant="contained"
+                type="submit"
+                fullWidth
+                sx={{mt: 3, mb: 3, borderRadius: "15px"}}
+                > Entrar
+                </Button>
+                { erro && ( <Alert severity="error" variant="outlined" sx={{ mb: 2 }}>Revise seus dados e tente novamente</Alert> ) }
                 <Grid container>
                     <Grid item xs>
-                        Esqueci a senha
+                        <Typography variant="overline" display="block" gutterBottom>
+                            Esqueci a senha
+                        </Typography>                        
                     </Grid>
                     <Grid item>
-                        Cadastrar
+                        <a href="cadastro">
+                            <Typography variant="overline" display="block" gutterBottom>
+                                Criar conta
+                            </Typography>                            
+                        </a>  
                     </Grid>
                 </Grid>
             </Box>
         </Box>
     </Container>
+    </>
   )
 }
 
