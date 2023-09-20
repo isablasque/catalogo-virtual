@@ -11,40 +11,43 @@ function Musicas() {
     const [duracao, setDuracao] = useState( "" );
     const [album, setAlbum] = useState( "" );
     const [imagem, setImagem] = useState( "" );
-    const [musica, setMusica ] = useState( "" );
-    const [erro, setErro ] = useState( false );
+    const [musica, setMusica ] = useState( false );
+    const [errof, setErroF ] = useState( false );
 
     function CadastrarMusica(evento) {
 
-        evento.preventDeFault();
+        evento.preventDefault();
+        console.log("ue" );
 
-        fetch( process.env.REACT_APP_BACKEND + "musicas", {
+        fetch( process.env.REACT_APP_BACKEND + "produtos", {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(
                 {
-                    nome: nome,
-                    cantor: cantor,
+                    titulo: nome,
+                    descricao: cantor,
+                    ano: "",
                     duracao: duracao,
-                    album: album,
-                    imagem: imagem
+                    imagem: imagem,
+                    categoria: album,
+                    usuario: localStorage.getItem( "usuario" )
                 }
             )
         })
         .then( (resposta) => resposta.json() )
         .then( (json) => {
 
-                if( json.nome ){
+                if( json.titulo ){
                     setMusica( true );
-                    setErro( false );
+                    setErroF( false );
                 } else{
-                    setErro( true );
+                    setErroF( true );
                     setMusica( false );
                 }
             })
-        .catch( (erro) => { setErro( true ) })
+        .catch( (errof) => { setErroF( true ) })
     }
 
     useEffect( () => {
@@ -59,11 +62,11 @@ function Musicas() {
 
     return (
         <>
-        <Menu></Menu>
+        <Menu />
         <Container component="section" maxWidth="sm">
             <Box sx={{
                 mt:5,
-                background: "#dce0e6",
+                background: "#EAEDF1",
                 padding: "30px",
                 borderRadius: "28px",
                 display: "flex",
@@ -73,6 +76,8 @@ function Musicas() {
                 <Typography variant="overline" display="block" gutterBottom>
                     Preencha os dados da musica
                 </Typography>
+                { musica && ( <Alert severity="success"  sx={{ mt: 2 }}>Obrigado por cadastrar</Alert>)}
+                { errof && ( <Alert severity="warning"  sx={{ mt: 2 }}>Desculpe tente novamente</Alert>)}  
                 <Box component="form" width="100%" onSubmit={CadastrarMusica}>
                     <TextField
                     type="text"
@@ -119,17 +124,15 @@ function Musicas() {
                     onChange={ (e) => setImagem( e.target.value )}
                     fullWidth
                     />
-                </Box>
-                <Button 
-                variant="contained"
-                endIcon={<SendIcon/>}
-                type="submit"
-                fullWidth
-                sx={{mt: 3, mb: 3, borderRadius: "15px"}}
+                    <Button 
+                    variant="contained"
+                    endIcon={<SendIcon/>}
+                    type="submit"
+                    fullWidth
+                    sx={{mt: 3, mb: 3, borderRadius: "15px"}}
                 > Cadastrar música
-                </Button>
-                { erro && ( <Alert severity="warning" variant="standard" sx={{ mt: 2, mb: 2 }}>Desculpe tente novamente</Alert>)}
-                { musica && ( <Alert severity="success" variant="standard" sx={{ mt: 2, mb: 2 }}>Obrigado por cadastrar</Alert>)}
+                </Button>           
+                </Box>
             </Box>
         </Container>
         </>

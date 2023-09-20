@@ -5,42 +5,45 @@ import App from './App';
 import { createBrowserRouter, RouterProvider} from "react-router-dom";
 import Login from './Login';
 import Cadastro from "./Cadastro";
-import Filmes from './Filmes';
 import Musicas from './Musicas'
-import EditaFilme from './EditaFilme';
+import EditaMusica from './EditaMusica';
 
 const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#ff9100',
-      light: '#ffab40',
-      dark: '#f57c00',
-      contrastText: '#7b19ff',
+      main: '#DE9FD0',
+      light: '#F1DBED',
+      dark: '#b069a0',
+      contrastText: '#772163',
     },
     secondary: {
-      main: '#7b19ff',
+      main: '#772163',
       light: '#ba8aff',
       dark: '#6620c5',
     },
     text: {
-      primary: '#757575',
+      primary: '#000',
       secondary: '#9e9e9e',
-      hint: '#ffb74d',
-      disabled: '#bdbdbd',
+      hint: '#F1DBED',
+      disabled: '#e8e8e8',
     },
     error: {
       main: '#d50000',
       contrastText: '#ffffff',
     },
     background: {
-      default: '#a4a4a4',
+      default: '#F1DBED',
     },
     warning: {
       main: '#ffc80d',
     },
     info: {
-      main: '#0073b3',
+      main: '#F5E9F2',
+      light: '#DE9FD0',
+      dark: '#ffffff',
+      contrastText: '#772163'
+
     },
     success: {
       main: '#0ebd3a',
@@ -63,16 +66,12 @@ const router = createBrowserRouter([
     element: <Cadastro />
   },
   {
-    path: "/filmes",
-    element: <Filmes />
-  },
-  {
     path: "/musicas",
     element: <Musicas />
   },
   {
     path: "/edicao/:id",
-    element: <EditaFilme />
+    element: <EditaMusica />
   }
 ]);
 

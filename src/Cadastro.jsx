@@ -15,7 +15,7 @@ function Cadastro() {
   function Cadastrar( evento ) {
 
     evento.preventDefault();
-    fetch( "http://10.139.75.32:8080/users", {
+    fetch( process.env.REACT_APP_BACKEND + "usuarios", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -60,15 +60,16 @@ function Cadastro() {
   return (
     <>
     <Menu></Menu>
-    <Container component="section" maxWidth="sm">
+    <Container component="section" maxWidth="sm" >
       <Box sx={{
         mt:5,
-        background: "#dce0e6",
+        background: "#EAEDF1",
         padding: "30px",
         borderRadius: "28px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        mb: 10
       }}>
         <Typography variant="overline" display="block" gutterBottom>
           Preencha os dados da musica
@@ -131,8 +132,8 @@ function Cadastro() {
             sx={{mt: 3, mb: 3, borderRadius: "15px"}}
             > Cadastrar
           </Button>
-          { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }} >Desculpe tente novamente</Alert> )}
-          { cadastro && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }}>Obrigado por se cadastrar</Alert>)}         
+          { cadastro && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }}>Obrigado por se cadastrar</Alert>)}
+          { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }} >Desculpe tente novamente</Alert> )}         
         </Box>
       </Box>
     </Container>

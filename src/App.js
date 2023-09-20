@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
-import Filme from "./components/Filme";
 import { Container } from "@mui/material";
-import "./global.css"
 import Menu from "./components/Menu";
 import Musica from "./components/Musica"
+import "./App.module.css"
 
 
 function App() {
 
-  const [ filmes, setFilmes ] = useState();
+  const [ musicas, setMusicas ] = useState();
   const [ erro, setErro ] = useState();
 
   useEffect(() => {
-    fetch( process.env.REACT_APP_BACKEND + "filmes", {
+
+    const usuario= localStorage.getItem( "usuario" )
+
+    fetch( process.env.REACT_APP_BACKEND + "produtos/" + usuario, {
         headers: {
             'Content-Type': 'application/json'
         }
     } )
     .then( (resposta) => resposta.json() )
-    .then( ( json ) => { setFilmes( json ) } ) 
+    .then( ( json ) => { setMusicas( json ) } ) 
     .catch( ( erro ) => { setErro( true ) } )
 
   }, [])
@@ -26,21 +28,22 @@ function App() {
 function Excluir( evento, id ){
 
   evento.preventDefault();
-    fetch( process.env.REACT_APP_BACKEND + "filmes", {
+    fetch( process.env.REACT_APP_BACKEND + "produtos", {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(
             {
-              id: id
+              id: id,
+              usuario: localStorage.getItem( "usuario" )
             }
         )
     } )
     .then( (resposta) => resposta.json() )
     .then( ( json ) => {
-      const novaLista = filmes.filter( (filme) => filme._id !== id );
-      setFilmes( novaLista );
+      const novaLista = musicas.filter( (musica) => musica._id !== id );
+      setMusicas( novaLista );
     } )
     .catch( ( erro ) => {  setErro( true ) } )
 }
@@ -54,18 +57,17 @@ function Excluir( evento, id ){
         flexWrap: "wrap",
         gap: "2rem"
       }}>
-        { filmes && (
-          filmes.map( (filme, index) => (
-            <Filme 
-            imagem={filme.imagem} 
-            titulo={filme.titulo}
-            descricao={filme.descricao}
-            categoria={filme.categoria}
-            ano={filme.ano}
-            duracao={filme.duracao}
-            excluir={ (e) => Excluir( e, filme._id)}
-            id={filme._id}
-            ></Filme>
+        { musicas && (
+          musicas.map( (musica, index) => (
+            <Musica
+            imagem={musica.imagem}
+            titulo={musica.titulo}
+            descricao={musica.descricao}
+            duracao={musica.duracao}
+            categoria={musica.categoria}
+            excluir={ (e) => Excluir( e, musica._id)}
+            id={musica._id}
+            ></Musica>
           ))
         )}
       </Container>

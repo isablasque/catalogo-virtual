@@ -3,7 +3,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, json } from 'react-router-dom';
 import Menu from './components/Menu';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Login() {
 
@@ -17,7 +16,6 @@ function Login() {
   useEffect( () => {
 
     if( login ) {
-        localStorage.setItem( "usuario" , JSON.stringify( {email: email } ) );
         setEmail( "" );
         setSenha( "" );
         navigate( "/" );
@@ -44,10 +42,12 @@ function Login() {
     {
         if( json.user ) 
         {
+            localStorage.setItem( "usuario", JSON.stringify( json.user._id ));
             setLogin( true );
         } 
         else 
         {
+            localStorage.removeItem( "usuario" );
             setErro( true );
         }
     } )
@@ -61,7 +61,7 @@ function Login() {
         <Box 
         sx={{
             mt:5,
-            background: "#dce0e6",
+            background: "#EAEDF1",
             padding: "30px",
             borderRadius: "28px",
             display: "flex",
@@ -101,7 +101,7 @@ function Login() {
                 sx={{mt: 3, mb: 3, borderRadius: "15px"}}
                 > Entrar
                 </Button>
-                { erro && ( <Alert severity="error" variant="outlined" sx={{ mb: 2 }}>Revise seus dados e tente novamente</Alert> ) }
+                { erro && ( <Alert severity="error" sx={{ mb: 2 }}>Revise seus dados e tente novamente</Alert> ) }
                 <Grid container>
                     <Grid item xs>
                         <Typography variant="overline" display="block" gutterBottom>

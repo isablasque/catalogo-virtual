@@ -20,3 +20,17 @@ body {
     text-decoration: none;
     font-size: smaller;
 }
+.top {
+    width: 100%;
+    background-color: #DE9FD0;
+    height: 12px;
+}
+header {
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-weight: bold;
+    color: #772163;
+}
